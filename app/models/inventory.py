@@ -2,6 +2,12 @@ from sqlalchemy import Integer, Date, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from datetime import date
 from app.models.base import Base
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from app.models.item import Item
+    from app.models.purchase_order_item import PurchaseOrderItem
+    from app.models.inventory_log import InventoryLog
 
 
 class Inventory(Base):
@@ -15,10 +21,10 @@ class Inventory(Base):
 
 
     # Foriegn Keys
-    # product id
-    # purchase order item id
+    item_id: Mapped[int] = mapped_column(Integer, ForeignKey('items.id'), nullable=False)
+    purchase_order_item_id: Mapped[int] = mapped_column(Integer, ForeignKey('purchase_order_items.id'), nullable=False)
 
     # Relationships
-    # product 
-    # purchase order item 
-    # inventory log
+    item: Mapped['Item'] = relationship(back_populates='inventories')
+    purchase_order_item: Mapped['PurchaseOrderItem'] = relationship(back_populates='inventories')
+    inventory_logs: Mapped[list['InventoryLog']] = relationship(back_populates='item', cascade='all, delete-orphan', lazy='selectin')

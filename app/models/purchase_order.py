@@ -3,6 +3,11 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from datetime import datetime
 from app.enums.purchase_order_status import PurchaseOrderStatus
 from app.models.base import Base
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from app.models.supplier import Supplier
+    from app.models.purchase_order_item import PurchaseOrderItem
 
 class PurchaseOrder(Base):
     __tablename__ = 'purchase_orders'
@@ -23,9 +28,9 @@ class PurchaseOrder(Base):
     delivery_date: Mapped[datetime | None] = mapped_column(TIMESTAMP(timezone=True), nullable=True)
 
     # Foreign Key
-    # supplier id
+    supplier_id: Mapped[int] = mapped_column(Integer, ForeignKey('suppliers.id'), nullable=False)
 
     # Relationships
-    # supplier
-    # purchase order items
+    supplier: Mapped['Supplier'] = relationship(back_populates='purchase_orders')
+    purchase_order_items: Mapped[list['PurchaseOrderItem']] = relationship(back_populates='purchase_order', cascade='all, delete-orphan', lazy='selectin')
 

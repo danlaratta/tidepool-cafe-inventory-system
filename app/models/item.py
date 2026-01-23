@@ -3,7 +3,13 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.enums.item_category import ItemCategory
 from app.enums.quantity_unit import QuantityUnit
 from app.models.base import Base
+from typing import TYPE_CHECKING
 
+if TYPE_CHECKING:
+    from app.models.inventory_log import InventoryLog
+    from app.models.inventory import Inventory
+    from app.models.supplier import Supplier
+    from app.models.purchase_order_item import PurchaseOrderItem
 
 class Item(Base):
     __tablename__ = 'items'
@@ -35,10 +41,10 @@ class Item(Base):
 
 
     # Foriegn Key
-    # supplier id 
+    supplier_id: Mapped[int] = mapped_column(Integer, ForeignKey('suppliers.id'), nullable=False)
 
     # Relationships
-    # supplier
-    # inventory
-    # purchase order item
-    # inventory log
+    supplier: Mapped['Supplier'] = relationship(back_populates='items')
+    inventories: Mapped[list['Inventory']] = relationship(back_populates='item', cascade='all, delete-orphan', lazy='selectin')
+    purchase_order_items: Mapped[list['PurchaseOrderItem']] = relationship(back_populates='item', cascade='all, delete-orphan', lazy='selectin')
+    inventory_logs: Mapped[list['InventoryLog']] = relationship(back_populates='item', cascade='all, delete-orphan', lazy='selectin')
