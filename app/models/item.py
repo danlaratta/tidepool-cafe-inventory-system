@@ -38,7 +38,7 @@ class Item(Base):
     # supplier id 
 
     # Relationships
+    # supplier
     # inventory
     # purchase order item
     # inventory log
-    

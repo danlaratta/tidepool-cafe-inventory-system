@@ -1,4 +1,4 @@
-from sqlalchemy import Integer, Date, func, String, Enum, Boolean, ForeignKey
+from sqlalchemy import Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.models.base import Base
 
@@ -12,6 +12,7 @@ class Supplier(Base):
     email: Mapped[str] = mapped_column(String(255), nullable=False, unique=True) 
     phone: Mapped[str] = mapped_column(String(15), nullable=False)
 
-    # Foriegn Key
 
     # Relationships
+    # products
+    # purchase orders
