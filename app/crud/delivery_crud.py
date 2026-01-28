@@ -11,8 +11,16 @@ class DeliveryCrud:
 
 
     # Create Delivery 
-    async def create_delivery(self) -> None:
-        pass
+    async def create_delivery(self, delivery: Delivery) -> Delivery:
+        self.db_session.add(delivery)
+
+        try: 
+            await self.db_session.flush()
+        except IntegrityError as e:
+            await self.db_session.rollback()
+            raise DatabaseException(f'Failed to create new delivery: violation of model constraints: {e}') from e
+        return delivery
+        
 
 
     # Get Delivery 

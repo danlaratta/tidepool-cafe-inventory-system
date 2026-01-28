@@ -18,7 +18,7 @@ class Delivery(Base):
     quantity_in_delivery: Mapped[int] = mapped_column(Integer, nullable=False)
     created_at: Mapped[datetime] = mapped_column(TIMESTAMP(timezone=True), nullable=False, server_default=func.now())
     received_at: Mapped[date] = mapped_column(Date, nullable=False, default=date.today)
-    expires_at: Mapped[date] = mapped_column(Date, nullable=False)
+    expires_at: Mapped[date | None] = mapped_column(Date, nullable=True)
 
 
     # Foriegn Keys
