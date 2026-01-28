@@ -6,8 +6,8 @@ from app.models.base import Base
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from app.models.inventory_log import InventoryLog
-    from app.models.inventory import Inventory
+    from app.models.delivery_log import DeliveryLog
+    from app.models.delivery import Delivery
     from app.models.supplier import Supplier
     from app.models.purchase_order_item import PurchaseOrderItem
 
@@ -45,6 +45,6 @@ class Item(Base):
 
     # Relationships
     supplier: Mapped['Supplier'] = relationship(back_populates='items')
-    inventories: Mapped[list['Inventory']] = relationship(back_populates='item', cascade='all, delete-orphan', lazy='selectin')
+    deliveries: Mapped[list['Delivery']] = relationship(back_populates='item', cascade='all, delete-orphan', lazy='selectin')
     purchase_order_items: Mapped[list['PurchaseOrderItem']] = relationship(back_populates='item', cascade='all, delete-orphan', lazy='selectin')
-    inventory_logs: Mapped[list['InventoryLog']] = relationship(back_populates='item', cascade='all, delete-orphan', lazy='selectin')
+    inventory_logs: Mapped[list['DeliveryLog']] = relationship(back_populates='item', cascade='all, delete-orphan', lazy='selectin')

@@ -1,6 +1,6 @@
 from enum import Enum 
 
-class InventoryLogType(Enum):
+class DeliveryLogType(Enum):
     RECEIVED = 'Received'       
     USED = 'Used'               
     EXPIRED = 'Expired'         

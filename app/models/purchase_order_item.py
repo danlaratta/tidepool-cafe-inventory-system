@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from app.models.item import Item
     from app.models.purchase_order import PurchaseOrder
-    from app.models.inventory import Inventory
+    from app.models.delivery import Delivery
 
 
 class PurchaseOrderItem(Base):
@@ -24,5 +24,5 @@ class PurchaseOrderItem(Base):
     # Relationships
     item: Mapped['Item'] = relationship(back_populates='purchase_order_items')
     purchase_order: Mapped['PurchaseOrder'] = relationship(back_populates='purchase_order_items')
-    inventories: Mapped[list['Inventory']] = relationship(back_populates='purchase_order_item', cascade='all, delete-orphan', lazy='selectin')
+    delivery: Mapped['Delivery'] = relationship(back_populates='purchase_order_item', uselist=False)
 
