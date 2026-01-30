@@ -5,7 +5,6 @@ from app.models.base import Base
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from app.models.item import Item
     from app.models.purchase_order_item import PurchaseOrderItem
     from app.models.delivery_log import DeliveryLog
 
@@ -22,10 +21,8 @@ class Delivery(Base):
 
 
     # Foriegn Keys
-    item_id: Mapped[int] = mapped_column(Integer, ForeignKey('items.id'), nullable=False)
     purchase_order_item_id: Mapped[int] = mapped_column(Integer, ForeignKey('purchase_order_items.id'), nullable=False, unique=True)
 
     # Relationships
-    item: Mapped['Item'] = relationship(back_populates='deliveries')
     purchase_order_item: Mapped['PurchaseOrderItem'] = relationship(back_populates='delivery')
     delivery_logs: Mapped[list['DeliveryLog']] = relationship(back_populates='delivery', cascade='all, delete-orphan', lazy='selectin')

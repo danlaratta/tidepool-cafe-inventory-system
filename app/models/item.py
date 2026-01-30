@@ -45,6 +45,5 @@ class Item(Base):
 
     # Relationships
     supplier: Mapped['Supplier'] = relationship(back_populates='items')
-    deliveries: Mapped[list['Delivery']] = relationship(back_populates='item', cascade='all, delete-orphan', lazy='selectin')
     purchase_order_items: Mapped[list['PurchaseOrderItem']] = relationship(back_populates='item', cascade='all, delete-orphan', lazy='selectin')
     inventory_logs: Mapped[list['DeliveryLog']] = relationship(back_populates='item', cascade='all, delete-orphan', lazy='selectin')
