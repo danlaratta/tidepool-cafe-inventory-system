@@ -1,6 +1,5 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.exc import IntegrityError
 from app.exceptions.database_exception import DatabaseException
 from app.models.delivery import Delivery
 
@@ -13,15 +12,9 @@ class DeliveryCrud:
     # Create Delivery 
     async def create_delivery(self, delivery: Delivery) -> Delivery:
         self.db_session.add(delivery)
-
-        try: 
-            await self.db_session.flush()
-        except IntegrityError as e:
-            await self.db_session.rollback()
-            raise DatabaseException(f'Failed to create new delivery: violation of model constraints: {e}') from e
+        await self.db_session.flush()
         return delivery
         
-
 
     # Get Delivery 
     async def get_delivery(self, delivery_id: int) -> Delivery:
@@ -33,23 +26,8 @@ class DeliveryCrud:
         return delivery
     
 
-    # Check delivery exists
-    async def check_delivery_exists(self, delivery_id: int) -> bool:
-        result = await self.db_session.execute(select(Delivery).where(Delivery.id == delivery_id))
-        delivery: Delivery | None = result.scalar_one_or_none()
-
-        if delivery is None:
-            return False
-        return True
-
-
-    # Update Delivery 
-    async def update_delivery(self) -> None:
-        pass
-
-
     # Delete Delivery 
-    async def delete_delivery(self) -> None:
-        pass
+    async def delete_delivery(self, delivery: Delivery) -> None:
+        await self.db_session.delete(delivery)
 
 
