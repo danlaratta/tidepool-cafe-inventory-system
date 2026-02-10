@@ -26,6 +26,11 @@ class DeliveryCrud:
         return delivery
     
 
+    # Update Delivery 
+    async def update_delivery(self, delivery: Delivery) -> Delivery:
+        await self.db_session.flush()
+        return delivery
+
     # Delete Delivery 
     async def delete_delivery(self, delivery: Delivery) -> None:
         await self.db_session.delete(delivery)

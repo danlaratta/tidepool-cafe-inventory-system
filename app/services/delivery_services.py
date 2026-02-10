@@ -47,7 +47,7 @@ class DeliveryService:
         # Update quantity
         delivery.quantity_in_delivery = quantity
 
-        return delivery
+        return await self.delivery_crud.update_delivery(delivery)
     
 
     # Delete delivery

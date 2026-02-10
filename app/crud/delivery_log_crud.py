@@ -27,11 +27,12 @@ class DeliveryLogCrud:
 
 
     # Update DeliveryLog 
-    async def update_delivery_log(self) -> None:
-        pass
+    async def update_delivery_log(self, log: DeliveryLog) -> DeliveryLog:
+        await self.db_session.flush()
+        return log
 
 
     # Delete DeliveryLog 
-    async def delete_delivery_log(self) -> None:
-        pass
+    async def delete_delivery_log(self, log: DeliveryLog) -> None:
+        await self.db_session.delete(log)
 
