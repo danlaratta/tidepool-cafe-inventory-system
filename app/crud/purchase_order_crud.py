@@ -10,9 +10,11 @@ class PurchaseOrderCrud:
 
 
     # Create PurchaseOrder 
-    async def create_purchase_order(self) -> None:
-        pass
-
+    async def create_purchase_order(self, order: PurchaseOrder) -> PurchaseOrder:
+        self.db_session.add(order)
+        await self.db_session.flush()
+        return order
+        
 
     # Get PurchaseOrder 
     async def get_purchase_order(self, order_id: int) -> PurchaseOrder:
@@ -25,10 +27,11 @@ class PurchaseOrderCrud:
 
 
     # Update PurchaseOrder 
-    async def update_purchase_order(self) -> None:
-        pass
+    async def update_purchase_order(self, order: PurchaseOrder) -> PurchaseOrder:
+        await self.db_session.flush()
+        return order
 
 
     # Delete PurchaseOrder 
-    async def delete_purchase_order(self) -> None:
-        pass
+    async def delete_purchase_order(self, order: PurchaseOrder) -> None:
+        await self.db_session.delete(order)
