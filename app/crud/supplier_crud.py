@@ -9,8 +9,10 @@ class SupplierCrud:
         self.db_session = db_session
 
     # Create Supplier 
-    async def create_supplier(self) -> None:
-        pass
+    async def create_supplier(self, supplier: Supplier) -> Supplier:
+        self.db_session.add(supplier)
+        await self.db_session.flush()
+        return supplier
 
 
     # Get Supplier 
@@ -23,11 +25,7 @@ class SupplierCrud:
         return supplier
 
 
-    # Update Supplier 
-    async def update_supplier(self) -> None:
-        pass
-
-
     # Delete Supplier 
-    async def delete_supplier(self) -> None:
-        pass
+    async def delete_supplier(self, supplier: Supplier) -> None:
+        await self.db_session.delete(supplier)
+        
