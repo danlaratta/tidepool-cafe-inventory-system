@@ -7,7 +7,6 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from app.models.delivery_log import DeliveryLog
-    from app.models.delivery import Delivery
     from app.models.supplier import Supplier
     from app.models.purchase_order_item import PurchaseOrderItem
 

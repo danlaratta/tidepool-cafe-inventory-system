@@ -1,6 +1,5 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.exc import IntegrityError
 from app.models.item import Item
 from app.exceptions.database_exception import DatabaseException
 
@@ -11,8 +10,10 @@ class ItemCrud:
 
 
     # Create Item 
-    async def create_item(self) -> None:
-        pass
+    async def create_item(self, item: Item) -> Item:
+        self.db_session.add(item)
+        await self.db_session.flush()
+        return item
 
 
     # Get Item 
@@ -26,10 +27,11 @@ class ItemCrud:
 
 
     # Update Item 
-    async def update_item(self) -> None:
-        pass
+    async def update_item(self, item: Item) -> Item:
+        await self.db_session.flush()
+        return item
 
 
     # Delete Item 
-    async def delete_item(self) -> None:
-        pass
+    async def delete_item(self, item: Item) -> None:
+        await self.db_session.delete(item)

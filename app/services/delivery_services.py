@@ -37,7 +37,7 @@ class DeliveryService:
 
     # Update delivery
     async def update_delivery(self, delivery_id: int, quantity: int) -> Delivery:
-        # get delivery to update
+        # Get delivery to update
         delivery: Delivery = await self.delivery_crud.get_delivery(delivery_id)
 
         # Validate 
@@ -51,7 +51,7 @@ class DeliveryService:
     
 
     # Delete delivery
-    async def delete_delivery(self, delivery_id: int):
+    async def delete_delivery(self, delivery_id: int) -> None:
         # get delivery to delete
         delivery: Delivery = await self.delivery_crud.get_delivery(delivery_id)
         await self.delivery_crud.delete_delivery(delivery)
