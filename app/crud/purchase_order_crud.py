@@ -1,6 +1,7 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.exc import IntegrityError
+from app.exceptions.database_exception import DatabaseException
+from app.models.purchase_order import PurchaseOrder
 
 
 class PurchaseOrderCrud:
@@ -14,8 +15,13 @@ class PurchaseOrderCrud:
 
 
     # Get PurchaseOrder 
-    async def get_purchase_order(self) -> None:
-        pass
+    async def get_purchase_order(self, order_id: int) -> PurchaseOrder:
+        result = await self.db_session.execute(select(PurchaseOrder).where(PurchaseOrder.id == order_id))
+        order: PurchaseOrder | None = result.scalar_one_or_none()
+
+        if order is None:
+            raise DatabaseException(f'No purchase order found with id: {order_id}') 
+        return order
 
 
     # Update PurchaseOrder 

@@ -11,10 +11,6 @@ class PurchaseOrderItemCreate(PurchaseOrderItemBase):
     purchase_order_id: int
 
 
-class PurchaseOrderItemUpdate(PurchaseOrderItemBase):
-    pass
-
-
 class PurchaseOrderItemResponse(PurchaseOrderItemBase):
     id: int 
     item_id: int

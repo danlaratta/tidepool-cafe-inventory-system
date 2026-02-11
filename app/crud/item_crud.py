@@ -1,7 +1,7 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.models.item import Item
 from app.exceptions.database_exception import DatabaseException
+from app.models.item import Item
 
 
 class ItemCrud:
