@@ -7,7 +7,7 @@ class SupplierService:
 
 
     # Create new supplier
-    async def create_new_supplier(self, name: str, email: str, phone: str) -> Supplier:
+    async def create_supplier(self, name: str, email: str, phone: str) -> Supplier:
         # Create supplier
         supplier: Supplier = Supplier(
             name = name,

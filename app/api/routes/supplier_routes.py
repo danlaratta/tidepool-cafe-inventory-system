@@ -20,7 +20,7 @@ def get_supplier_service(db: AsyncSession = Depends(get_db)) -> SupplierService:
 # Create Route
 @router.post('/', response_model= SupplierResponse, status_code=status.HTTP_201_CREATED) 
 async def create_supplier_route(supplier_create: SupplierCreate, service: SupplierService = Depends(get_supplier_service)) -> Supplier:
-    supplier: Supplier = await service.create_new_supplier(
+    supplier: Supplier = await service.create_supplier(
         name = supplier_create.name,
         email = supplier_create.email,
         phone = supplier_create.phone,
@@ -36,7 +36,7 @@ async def get_supplier_route(supplier_id: int, service: SupplierService = Depend
 
     
 # Delete Route
-@router.delete('/{supplier_id}', response_model= SupplierResponse, status_code=status.HTTP_201_CREATED) 
+@router.delete('/{supplier_id}', response_model= SupplierResponse, status_code=status.HTTP_204_NO_CONTENT) 
 async def delete_supplier_route(supplier_id: int, service: SupplierService = Depends(get_supplier_service)) -> None:
     await service.delete_supplier(supplier_id)
     

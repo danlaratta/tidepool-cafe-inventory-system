@@ -13,7 +13,7 @@ class ItemService:
 
 
     # Create new item
-    async def create_new_item(self, name: str, category: ItemCategory, threshold: int, reorder_amount: int, unit: QuantityUnit, perishable: bool, supplier_id: int) -> Item:
+    async def create_item(self, name: str, category: ItemCategory, threshold: int, reorder_amount: int, unit: QuantityUnit, perishable: bool, supplier_id: int) -> Item:
         # Get the supplier
         supplier: Supplier = await self.supplier_crud.get_supplier(supplier_id)
 

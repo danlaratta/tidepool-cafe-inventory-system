@@ -13,7 +13,7 @@ class DeliveryService:
 
 
     # Create new delivery
-    async def create_new_delivery(self, quantity: int, received_at: date | None, purchase_order_item_id: int) -> Delivery:
+    async def create_delivery(self, quantity: int, received_at: date | None, purchase_order_item_id: int) -> Delivery:
         # Get the purchase order item in delivery
         order_item: PurchaseOrderItem = await self.order_item_crud.get_order_item(purchase_order_item_id)
     
