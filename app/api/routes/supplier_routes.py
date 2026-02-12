@@ -1,8 +1,7 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.crud.supplier_crud import SupplierCrud
 from app.database.database import get_db
-from app.exceptions.database_exception import DatabaseException
 from models.supplier import Supplier
 from app.schemas.supplier_schema import SupplierCreate, SupplierResponse
 from app.services.supplier_services import SupplierService
