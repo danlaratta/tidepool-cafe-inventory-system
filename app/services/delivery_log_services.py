@@ -12,7 +12,7 @@ class DeliveryLogService:
         self.delivery_crud = delivery_crud
 
 
-    #  Create Log
+    #  Create delivery log
     async def create_log(self, change_amount: int, log_type: DeliveryLogType, delivery_id: int) -> DeliveryLog:
         # Get delivery
         delivery: Delivery = await self.delivery_crud.get_delivery(delivery_id)
@@ -26,7 +26,13 @@ class DeliveryLogService:
         return await self.log_crud.create_delivery_log(log)
 
 
-    #  Update Log
+    # Get delivery log
+    async def get_delivery_log(self, log_id: int) -> DeliveryLog:
+        log: DeliveryLog = await self.log_crud.get_delivery_log(log_id)
+        return log
+    
+
+    #  Update delivery log
     async def update_log(self, log_id: int, change_amount: int, delivery_log_type: DeliveryLogType) -> DeliveryLog:
         # Get delivery log to update
         log: DeliveryLog = await self.log_crud.get_delivery_log(log_id)
@@ -48,9 +54,8 @@ class DeliveryLogService:
         return await self.log_crud.update_delivery_log(log)
         
 
-    #  Delete Log
+    #  Delete delivery log
     async def delete_log(self, log_id: int) -> None:
         # Get delivery log to update
         log: DeliveryLog = await self.log_crud.get_delivery_log(log_id)
         await self.log_crud.delete_delivery_log(log)
-

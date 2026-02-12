@@ -8,7 +8,7 @@ from app.services.supplier_services import SupplierService
 
 
 # Create supplier router
-router = APIRouter(prefix='/supplier', tags=['Suppliers'])
+router = APIRouter(prefix='/suppliers', tags=['Suppliers'])
 
 
 # Dependency builder

@@ -35,6 +35,12 @@ class DeliveryService:
         return await self.delivery_crud.create_delivery(delivery)
 
 
+    # Get delivery
+    async def get_delivery(self, delivery_id: int) -> Delivery:
+        delivery: Delivery = await self.delivery_crud.get_delivery(delivery_id)
+        return delivery
+    
+
     # Update delivery
     async def update_delivery(self, delivery_id: int, quantity: int) -> Delivery:
         # Get delivery to update

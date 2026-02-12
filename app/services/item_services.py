@@ -13,7 +13,7 @@ class ItemService:
 
 
     # Create new item
-    async def create_item(self, name: str, category: ItemCategory, threshold: int, reorder_amount: int, unit: QuantityUnit, perishable: bool, supplier_id: int) -> Item:
+    async def create_item(self, name: str, category: ItemCategory, threshold: int, reitem_amount: int, unit: QuantityUnit, perishable: bool, supplier_id: int) -> Item:
         # Get the supplier
         supplier: Supplier = await self.supplier_crud.get_supplier(supplier_id)
 
@@ -21,8 +21,8 @@ class ItemService:
         item: Item = Item(
             name = name, 
             category = category,
-            reorder_threshold = threshold,
-            reorder_amount = reorder_amount,
+            reitem_threshold = threshold,
+            reitem_amount = reitem_amount,
             quantity_unit = unit,
             perishable = perishable,
             supplier_id = supplier.id,
@@ -31,21 +31,27 @@ class ItemService:
         return await self.item_crud.create_item(item)
 
 
+    # Get item
+    async def get_item(self, item_id: int) -> Item:
+        item: Item = await self.item_crud.get_item(item_id)
+        return item
+    
+
     # Update item
-    async def update_item(self, item_id: int, threshold: int, reorder_amount: int ) -> Item:
+    async def update_item(self, item_id: int, threshold: int, reitem_amount: int ) -> Item:
         # Get item to update
         item: Item = await self.item_crud.get_item(item_id)
 
         # Validate
         if threshold < 0:
-            raise ValueError('Reorder threshold must be a postivie number')
+            raise ValueError('Reitem threshold must be a postivie number')
         
-        if reorder_amount < 0:
-            raise ValueError('Reorder amount must be a postivie number')
+        if reitem_amount < 0:
+            raise ValueError('Reitem amount must be a postivie number')
         
         # Update 
-        item.reorder_threshold = threshold
-        item.reorder_amount = reorder_amount
+        item.reitem_threshold = threshold
+        item.reitem_amount = reitem_amount
 
         return await self.item_crud.update_item(item)
 

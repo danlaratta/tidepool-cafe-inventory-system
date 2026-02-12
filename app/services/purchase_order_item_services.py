@@ -14,7 +14,7 @@ class PurchaseOrderItemService:
         self.order_crud = order_crud
 
 
-    # Create new purchase order item
+    # Create purchase order item
     async def create_purchase_order_item(self, quantity: int, delivery_received: bool, item_id: int, purchase_order_id: int) -> PurchaseOrderItem:
         # Get item and purchase order
         item: Item = await self.item_crud.get_item(item_id)
@@ -30,6 +30,11 @@ class PurchaseOrderItemService:
 
         return await self.order_item_crud.create_order_item(order_item)
 
+
+    # Get purchase order item    
+    async def get_purchase_order_item(self, order_item_id: int) -> PurchaseOrderItem:
+        order_item: PurchaseOrderItem = await self.order_item_crud.get_order_item(order_item_id)
+        return order_item
 
 
     # Delete purchase order item
