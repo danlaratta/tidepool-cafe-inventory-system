@@ -7,7 +7,7 @@ from app.schemas.supplier_schema import SupplierCreate, SupplierResponse
 from app.services.supplier_services import SupplierService
 
 
-# Create supplier router
+# Create router
 router = APIRouter(prefix='/suppliers', tags=['Suppliers'])
 
 

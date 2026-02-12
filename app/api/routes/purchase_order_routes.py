@@ -8,7 +8,7 @@ from app.schemas.purchase_order_schema import PurchaseOrderCreate, PurchaseOrder
 from app.services.purchase_order_services import PurchaseOrderService
 
 
-# Create purchase_order router
+# Create router
 router = APIRouter(prefix='/purchase-orders', tags=['Purchase Orders'])
 
 

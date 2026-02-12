@@ -8,8 +8,8 @@ from app.schemas.delivery_log_schema import DeliveryLogCreate, DeliveryLogUpdate
 from app.services.delivery_log_services import DeliveryLogService
 
 
-# Create purchase_order router
-router = APIRouter(prefix='/purchase-orders', tags=['Purchase Orders'])
+# Create router
+router = APIRouter(prefix='/delivery-logs', tags=['Delivery Logs'])
 
 
 # Dependency builder
