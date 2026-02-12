@@ -9,8 +9,9 @@ from app.schemas.purchase_order_item_schema import PurchaseOrderItemCreate, Purc
 from app.services.purchase_order_item_services import PurchaseOrderItemService
 
 
-# Create supplier router
+# Create router
 router = APIRouter(prefix='/purchase-order-items', tags=['Purchase Order Items'])
+
 
 # Dependency Builder
 def get_order_item_service(db: AsyncSession = Depends(get_db)) -> PurchaseOrderItemService:

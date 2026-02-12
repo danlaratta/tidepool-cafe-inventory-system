@@ -41,12 +41,12 @@ async def get_purchase_order_route(order_id: int, service: PurchaseOrderService 
 # Update Route
 @router.put('/{order_id}', response_model= PurchaseOrderResponse, status_code=status.HTTP_200_OK) 
 async def update_purchase_order_route(order_id: int, order_update: PurchaseOrderUpdate, service: PurchaseOrderService = Depends(get_purchase_order_service)) -> PurchaseOrder:
-    purchase_order= await service.update_purchase_order(
+    update_purchase_order = await service.update_purchase_order(
         order_id = order_id,
         status = order_update.status,
         delivery_date = order_update.delivery_date,
     )
-    return purchase_order
+    return update_purchase_order
 
 
 # Delete Route
